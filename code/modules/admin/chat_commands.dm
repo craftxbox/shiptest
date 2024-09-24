@@ -1,5 +1,13 @@
 #define TGS_STATUS_THROTTLE 5
 
+/datum/tgs_chat_command/ooc
+	name = "ooc"
+	help_text = "Sends an OOC message to the server."
+
+/datum/tgs_chat_command/ooc/Run(datum/tgs_chat_user/sender, params)
+	TgsOoc(params, sender.friendly_name)
+	return new /datum/tgs_message_content("IRC: <[sender.friendly_name]> [params]")
+
 /datum/tgs_chat_command/restart
 	name = "restart"
 	help_text = "Restarts the server if there are no active admins on."
@@ -149,6 +157,7 @@
 	var/res = TgsPm(target, all_params.Join(" "), sender.friendly_name)
 	if(res != "Message Successful")
 		return new /datum/tgs_message_content(res)
+	return new /datum/tgs_message_content("Message sent to [target].")
 
 /datum/tgs_chat_command/namecheck
 	name = "namecheck"

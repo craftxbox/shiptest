@@ -55,6 +55,8 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 	mob.log_talk(raw_msg, LOG_OOC)
 
+	send2chat("OOC: <[key]> [raw_msg]", "ooc")
+
 	var/keyname = key
 	if(prefs.unlock_content)
 		if(prefs.toggles & MEMBER_PUBLIC)
@@ -410,3 +412,18 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	message += "Example: say ';laughs maniacally!*' >> \[Common] Joe Schmoe laughs maniacally!"
 
 	to_chat(usr, "<span class='notice'>[message]</span>")
+
+#define TGS_OOC_USAGE "Usage: ooc <message>"
+/proc/TgsOoc(msg,sender)
+	var/keyname = "<font color='green'><i>[sender]</i></font>"
+	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
+	for(var/client/C in GLOB.clients)
+		if(C.prefs.chat_toggles & CHAT_OOC)
+			if(sender in C.prefs.ignoring)
+				continue
+
+			if(!(sender in C.prefs.ignoring))
+				if(GLOB.OOC_COLOR)
+					to_chat(C, "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>IRC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font></span>", MESSAGE_TYPE_OOC)
+				else
+					to_chat(C, "<span class='ooc'><span class='prefix'>IRC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>", MESSAGE_TYPE_OOC)
