@@ -76,5 +76,5 @@
 		"Janitor": 1,
 		"Assistant": 2
 	},
-	"enabled": false
+	"enabled": true
 }
