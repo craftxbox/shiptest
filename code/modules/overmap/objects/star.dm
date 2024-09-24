@@ -7,7 +7,7 @@
 /datum/overmap/star/Initialize(position, ...)
 	var/name = gen_star_name()
 	Rename(name)
-	set_station_name(name)
+	//set_station_name(name) // we don't need this here.
 	token.desc = token_desc
 	alter_token_appearance()
 
