@@ -77,7 +77,7 @@
 	response_timer_id = null
 
 /obj/item/sector_charter/proc/rename_station(designation, uname, ureal_name, ukey)
-	set_station_name(designation)
+	//set_station_name(designation)
 	minor_announce("[ureal_name] has designated your station as [station_name()]", "Captain's Charter", 0)
 	log_game("[ukey] has renamed the station as [station_name()].")
 

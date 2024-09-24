@@ -181,13 +181,13 @@
 			var/new_name = input(holder, "Please input a new name for the sector.", "What?", "") as text|null
 			if(!new_name)
 				return
-			set_station_name(new_name)
+			//set_station_name(new_name)
 			log_admin("[key_name(holder)] renamed the sector to \"[new_name]\".")
 			message_admins(span_adminnotice("[key_name_admin(holder)] renamed the station to: [new_name]."))
 			priority_announce("[command_name()] has renamed the sector to \"[new_name]\".")
 		if("reset_name")
 			var/new_name = new_station_name()
-			set_station_name(new_name)
+			//set_station_name(new_name)
 			log_admin("[key_name(holder)] reset the sector's name.")
 			message_admins(span_adminnotice("[key_name_admin(holder)] reset the sector's name."))
 			priority_announce("[command_name()] has renamed the sector to \"[new_name]\".")

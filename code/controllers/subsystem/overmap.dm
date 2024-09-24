@@ -1097,7 +1097,7 @@ SUBSYSTEM_DEF(overmap)
 
 /datum/overmap_star_system/shiptest/create_map()
 	. = ..()
-	set_station_name(starname)
+	//set_station_name(starname)
 
 /datum/overmap_star_system/admin_sandbox
 	name = "Admin Sandbox"
