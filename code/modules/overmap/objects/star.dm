@@ -8,7 +8,7 @@
 	var/name = gen_star_name()
 	SSpoints_of_interest.make_point_of_interest(token)
 	Rename(name)
-	set_station_name(name)
+	//set_station_name(name) // we don't need this here.
 	token.desc = token_desc
 	alter_token_appearance()
 
