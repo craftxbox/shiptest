@@ -38,8 +38,8 @@
 
 	return TRUE
 
-/datum/vote/transfer_vote/get_vote_result(list/non_voters)
-	choices[CHOICE_TRANSFER] += round(length(non_voters) * TRANSFER_FACTOR)
+/datum/vote/transfer_vote/get_vote_result(list/non_voters)))
+	// choices[CHOICE_TRANSFER] += round(length(non_voters) * TRANSFER_FACTOR)
 
 	return ..()
 
