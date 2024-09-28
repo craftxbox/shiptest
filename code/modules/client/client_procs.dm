@@ -434,7 +434,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		if (nnpa >= 0)
 			message_admins("New user: [key_name_admin(src)] is connecting here for the first time.")
 			if (CONFIG_GET(flag/irc_first_connection_alert))
-				send2tgs_adminless_only("New-user", "[key_name(src)] is connecting for the first time!")
+				send2tgs("New-user", "[key_name(src)] is connecting for the first time!")
 	else if (isnum(cached_player_age) && cached_player_age < nnpa)
 		message_admins("New user: [key_name_admin(src)] just connected with an age of [cached_player_age] day[(player_age==1?"":"s")]")
 	if(CONFIG_GET(flag/use_account_age_for_jobs) && account_age >= 0)
@@ -442,10 +442,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(account_age >= 0 && account_age < nnpa)
 		message_admins("[key_name_admin(src)] (IP: [address], ID: [computer_id]) is a new BYOND account [account_age] day[(account_age==1?"":"s")] old, created on [account_join_date].")
 		if (CONFIG_GET(flag/irc_first_connection_alert))
-			send2tgs_adminless_only("new_byond_user", "[key_name(src)] (IP: [address], ID: [computer_id]) is a new BYOND account [account_age] day[(account_age==1?"":"s")] old, created on [account_join_date].")
+			send2tgs("new_byond_user", "[key_name(src)] (IP: [address], ID: [computer_id]) is a new BYOND account [account_age] day[(account_age==1?"":"s")] old, created on [account_join_date].")
 	get_message_output("watchlist entry", ckey)
 	check_ip_intel()
 	validate_key_in_db()
+
+	//Useful for very small servers that might get one or two players a day & you want to know about them
+	if(CONFIG_GET(string/chat_log_connects))
+		send2chat("[key_name(src)] has connected", CONFIG_GET(string/chat_log_connects))
 
 	send_resources()
 
