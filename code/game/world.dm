@@ -298,13 +298,13 @@ GLOBAL_VAR(restart_counter)
 		var/server_name = CONFIG_GET(string/servername)
 		if (server_name)
 			s += "<b>[server_name]</b> &#8212; "
-		features += "[CONFIG_GET(flag/norespawn) ? "no " : ""]respawn"
+		//features += "[CONFIG_GET(flag/norespawn) ? "no " : ""]respawn"
 		hostedby = CONFIG_GET(string/hostedby)
 
 	var/discord_url
 	var/github_url
 	if(isnull(config))
-		discord_url = "https://shiptest.net/discord"
+		discord_url = "https://crxb.cc/irc?channel=#shiptest"
 		github_url = "https://github.com/shiptest-ss13/Shiptest"
 	else
 		discord_url = CONFIG_GET(string/discordurl)
@@ -313,7 +313,7 @@ GLOBAL_VAR(restart_counter)
 	s += "<b>[station_name()]</b>";
 	s += " ("
 	s += "<a href=\"[discord_url]\">" //Change this to wherever you want the hub to link to.
-	s += "Discord"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "IRC"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"
 	s += " ("
@@ -329,10 +329,10 @@ GLOBAL_VAR(restart_counter)
 	if (popcap)
 		popcaptext = "/[popcap]"
 
-	if (players > 1)
-		features += "[players][popcaptext] players"
-	else if (players > 0)
-		features += "[players][popcaptext] player"
+	// if (players > 1)
+	// 	features += "[players][popcaptext] players"
+	// else if (players > 0)
+	// 	features += "[players][popcaptext] player"
 
 	game_state = (CONFIG_GET(number/extreme_popcap) && players >= CONFIG_GET(number/extreme_popcap)) //tells the hub if we are full
 
