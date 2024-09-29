@@ -38,17 +38,25 @@
 
 	return TRUE
 
-/datum/vote/transfer_vote/get_vote_result(list/non_voters)))
+/datum/vote/transfer_vote/get_vote_result(list/non_voters)
 	// choices[CHOICE_TRANSFER] += round(length(non_voters) * TRANSFER_FACTOR)
-
 	return ..()
+
+/datum/vote/transfer_vote/tiebreaker(list/winners)
+	return CHOICE_CONTINUE
 
 /datum/vote/transfer_vote/get_winner_text(list/all_winners, real_winner, list/non_voters)
 	. = ..()
-	var/boost = round(length(non_voters) * TRANSFER_FACTOR)
-	if(boost)
+	// var/boost = round(length(non_voters) * TRANSFER_FACTOR)
+	// if(boost)
+	// 	. += "\n"
+	// 	. += span_bold("Transfer option was boosted by [boost] non-voters ([round(TRANSFER_FACTOR * 100, 0.1)]%) due to round length.")
+	if (real_winner == CHOICE_CONTINUE)
 		. += "\n"
-		. += span_bold("Transfer option was boosted by [boost] non-voters ([round(TRANSFER_FACTOR * 100, 0.1)]%) due to round length.")
+		. += span_bold("The round will continue.")
+	else if (real_winner == CHOICE_TRANSFER)
+		. += "\n"
+		. += span_bold("Initiating Bluespace Jump...")
 
 /datum/vote/transfer_vote/finalize_vote(winning_option)
 	if(winning_option == CHOICE_CONTINUE)
