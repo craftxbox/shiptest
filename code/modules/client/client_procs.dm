@@ -512,6 +512,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	GLOB.clients -= src
 	GLOB.directory -= ckey
 	log_access("Logout: [key_name(src)]")
+	if(CONFIG_GET(string/chat_log_disconnects))
+		send2chat("[key_name(src)] has disconnected", CONFIG_GET(string/chat_log_disconnects))
 	GLOB.ahelp_tickets.client_logout(src)
 	GLOB.interviews.client_logout(src)
 	GLOB.requests.client_logout(src)
