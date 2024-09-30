@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(autotransfer)
 		COOLDOWN_START(src, next_vote, CONFIG_GET(number/vote_autotransfer_initial))
 	else
 		message_admins("Autotransfer vote interval is negative. Autotransfer disabled.")
+		can_fire = 0
 	return ..()
 
 /datum/controller/subsystem/autotransfer/fire()
