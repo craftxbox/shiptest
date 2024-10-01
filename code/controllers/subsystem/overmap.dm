@@ -132,7 +132,10 @@ SUBSYSTEM_DEF(overmap)
 		spawn_events()
 		spawn_ruin_levels()
 
-	spawn_outpost()
+	var/numberOfOutposts = max(floor(size/16),1)
+
+	for var/i in 1 to numberOfOutposts // one outpost every 16 tiles of overmap size
+		spawn_outpost()
 	//spawn_initial_ships()
 
 /**
