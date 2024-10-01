@@ -282,7 +282,10 @@ SUBSYSTEM_DEF(ticker)
 
 	to_chat(world, "<span class='notice'><B>Welcome to [station_name()], enjoy your stay!</B></span>")
 	SSredbot.send_discord_message("ooc", "**A new round has begun.**")
-	SEND_SOUND(world, sound('sound/roundstart/addiguana.ogg'))
+	SEND_SOUND(world, sound(pick(/
+	'sound/roundstart/addiguana.ogg',
+	'sound/misc/mymoney.ogg'/
+	)))
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
@@ -563,12 +566,11 @@ SUBSYSTEM_DEF(ticker)
 	update_everything_flag_in_db()
 	if(!round_end_sound)
 		round_end_sound = pick(\
-		'sound/roundend/deliguana.ogg',
-		'sound/roundend/undecided.ogg',
-		'sound/roundend/repair.ogg',
-		'sound/roundend/boowomp.ogg',
+		'sound/ai/animes.ogg',
 		'sound/roundend/shiptestingthursday.ogg',
-		'sound/roundend/gayrights.ogg'\
+
+		'sound/misc/vinethud.ogg',
+		'sound/misc/yeehaw.ogg'\
 		)
 	///The reference to the end of round sound that we have chosen.
 	var/sound/end_of_round_sound_ref = sound(round_end_sound)
