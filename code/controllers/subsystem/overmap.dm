@@ -446,7 +446,10 @@ SUBSYSTEM_DEF(overmap)
 	spawn_ruin_levels()
 
 	if(has_outpost)
-		spawn_outpost()
+		var/numberOfOutposts = max(floor(size/16),1)
+
+		for var/i in 1 to numberOfOutposts // one outpost every 16 tiles of overmap size
+			spawn_outpost()
 
 /**
  * VERY Simple random generation for overmap events, spawns the event in a random turf and sometimes spreads it out similar to ores
