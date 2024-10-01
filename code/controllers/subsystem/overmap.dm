@@ -448,7 +448,7 @@ SUBSYSTEM_DEF(overmap)
 	if(has_outpost)
 		var/numberOfOutposts = max(floor(size/16),1)
 
-		for var/i in 1 to numberOfOutposts // one outpost every 16 tiles of overmap size
+		for (var/i in 1 to numberOfOutposts) // one outpost every 16 tiles of overmap size
 			spawn_outpost()
 
 /**

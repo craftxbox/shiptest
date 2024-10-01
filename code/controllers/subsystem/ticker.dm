@@ -284,9 +284,9 @@ SUBSYSTEM_DEF(ticker)
 
 	to_chat(world, span_notice("<B>Welcome to [station_name()], enjoy your stay!</B>"))
 	SSredbot.send_discord_message("ooc", "**A new round has begun.**")
-	SEND_SOUND(world, sound(pick(/
+	SEND_SOUND(world, sound(pick(\
 	'sound/roundstart/addiguana.ogg',
-	'sound/misc/mymoney.ogg'/
+	'sound/misc/mymoney.ogg'\
 	)))
 
 	current_state = GAME_STATE_PLAYING
