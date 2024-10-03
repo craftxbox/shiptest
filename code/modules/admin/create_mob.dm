@@ -47,6 +47,10 @@
 	H.dna.features["vox_neck_quills"] = pick(GLOB.vox_neck_quills_list)
 	H.dna.features["elzu_horns"] = pick(GLOB.elzu_horns_list)
 	H.dna.features["tail_elzu"] = pick(GLOB.tails_list_elzu)
+	H.dna.features["tail_vulp"] = pick(GLOB.tails_list_vulp)
+	H.dna.features["tail_vulp_marks"] = pick(GLOB.tails_list_vulp_marks)
+	H.dna.features["vulpkanin_head_markings"] = pick(GLOB.vulpkanin_head_markings_list)
+	H.dna.features["vulpkanin_body_markings"] = pick(GLOB.vulpkanin_body_markings_list)
 
 	H.update_body()
 	H.update_hair()

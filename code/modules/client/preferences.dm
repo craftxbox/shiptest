@@ -94,6 +94,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							"ethcolor" = "9c3030",
 							"tail_lizard" = "Smooth",
 							"tail_human" = "None",
+							"tail_vulp" = "None",
+							"tail_vulp_marks" = "None",
+							"body_marking_vulp" = "None",
+							"head_marking_vulp" = "None",
 							"face_markings" = "None",
 							"horns" = "None",
 							"ears" = "None",
@@ -803,6 +807,58 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<h3>Tail</h3>"
 
 				dat += "<a href='?_src_=prefs;preference=tail_human;task=input'>[features["tail_human"]]</a><BR>"
+
+				mutant_category++
+				if(mutant_category >= MAX_MUTANT_ROWS)
+					dat += "</td>"
+					mutant_category = 0
+
+			if("tail_vulp" in pref_species.default_features)
+				if(!mutant_category)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Tail</h3>"
+
+				dat += "<a href='?_src_=prefs;preference=tail_vulp;task=input'>[features["tail_vulp"]]</a><BR>"
+
+				mutant_category++
+				if(mutant_category >= MAX_MUTANT_ROWS)
+					dat += "</td>"
+					mutant_category = 0
+
+			if("tail_vulp_marks" in pref_species.default_features)
+				if(!mutant_category)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Tail Markings</h3>"
+
+				dat += "<a href='?_src_=prefs;preference=tail_vulp_marks;task=input'>[features["tail_vulp_marks"]]</a><BR>"
+
+				mutant_category++
+				if(mutant_category >= MAX_MUTANT_ROWS)
+					dat += "</td>"
+					mutant_category = 0
+			
+			if("body_marking_vulp" in pref_species.default_features)
+				if(!mutant_category)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Body Markings</h3>"
+
+				dat += "<a href='?_src_=prefs;preference=body_marking_vulp;task=input'>[features["body_marking_vulp"]]</a><BR>"
+
+				mutant_category++
+				if(mutant_category >= MAX_MUTANT_ROWS)
+					dat += "</td>"
+					mutant_category = 0
+			
+			if("head_marking_vulp")
+				if(!mutant_category)
+					dat += APPEARANCE_CATEGORY_COLUMN
+
+				dat += "<h3>Head Markings</h3>"
+
+				dat += "<a href='?_src_=prefs;preference=head_marking_vulp;task=input'>[features["head_marking_vulp"]]</a><BR>"
 
 				mutant_category++
 				if(mutant_category >= MAX_MUTANT_ROWS)
@@ -1660,6 +1716,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(href_list["preference"] in GLOB.preferences_custom_names)
 				ask_for_custom_name(user,href_list["preference"])
 
+			var/new_hairstyle
+			var/list/hairstyles_list = GLOB.hairstyles_list.Copy()
+			if(gender == MALE)
+				hairstyles_list = GLOB.hairstyles_male_list.Copy()
+			else if(gender == FEMALE)
+				hairstyles_list = GLOB.hairstyles_female_list.Copy()
+
+			if(pref_species.id == SPECIES_VULPKANIN) // ? refactor this to work off something in /datum/species if you add more species specific hair. Don't hack in another species like this.
+				hairstyles_list += GLOB.vulpkanin_hairstyles_list
+
+			var/new_facial_hairstyle
+			var/list/facial_hairstyles_list = GLOB.facial_hairstyles_list.Copy()
+			if(gender == MALE)
+				facial_hairstyles_list = GLOB.facial_hairstyles_male_list.Copy()
+			else if(gender == FEMALE)
+				facial_hairstyles_list = GLOB.facial_hairstyles_female_list.Copy()
+			
+			if(pref_species.id == SPECIES_VULPKANIN) // ? refactor this to work off something in /datum/species if you add more species specific hair. Don't hack in another species like this.
+				facial_hairstyles_list += GLOB.vulpkanin_facial_hair_list
 
 			switch(href_list["preference"])
 				if("ghostform")
@@ -1716,31 +1791,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						hair_color = sanitize_hexcolor(new_hair)
 
 				if("hairstyle")
-					var/new_hairstyle
-					if(gender == MALE)
-						new_hairstyle = input(user, "Choose your character's hairstyle:", "Character Preference")  as null|anything in GLOB.hairstyles_male_list
-					else if(gender == FEMALE)
-						new_hairstyle = input(user, "Choose your character's hairstyle:", "Character Preference")  as null|anything in GLOB.hairstyles_female_list
-					else
-						new_hairstyle = input(user, "Choose your character's hairstyle:", "Character Preference")  as null|anything in GLOB.hairstyles_list
+					new_hairstyle = input(user, "Choose your character's hairstyle:", "Character Preference")  as null|anything in hairstyles_list
+
 					if(new_hairstyle)
 						hairstyle = new_hairstyle
 
 				if("next_hairstyle")
-					if (gender == MALE)
-						hairstyle = next_list_item(hairstyle, GLOB.hairstyles_male_list)
-					else if(gender == FEMALE)
-						hairstyle = next_list_item(hairstyle, GLOB.hairstyles_female_list)
-					else
-						hairstyle = next_list_item(hairstyle, GLOB.hairstyles_list)
+					hairstyle = next_list_item(hairstyle, hairstyles_list)
 
 				if("previous_hairstyle")
-					if (gender == MALE)
-						hairstyle = previous_list_item(hairstyle, GLOB.hairstyles_male_list)
-					else if(gender == FEMALE)
-						hairstyle = previous_list_item(hairstyle, GLOB.hairstyles_female_list)
-					else
-						hairstyle = previous_list_item(hairstyle, GLOB.hairstyles_list)
+					hairstyle = previous_list_item(hairstyle, hairstyles_list)
 
 				if("facial")
 					var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference","#"+facial_hair_color) as color|null
@@ -1748,31 +1808,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						facial_hair_color = sanitize_hexcolor(new_facial)
 
 				if("facial_hairstyle")
-					var/new_facial_hairstyle
-					if(gender == MALE)
-						new_facial_hairstyle = input(user, "Choose your character's facial-hairstyle:", "Character Preference")  as null|anything in GLOB.facial_hairstyles_male_list
-					else if(gender == FEMALE)
-						new_facial_hairstyle = input(user, "Choose your character's facial-hairstyle:", "Character Preference")  as null|anything in GLOB.facial_hairstyles_female_list
-					else
-						new_facial_hairstyle = input(user, "Choose your character's facial-hairstyle:", "Character Preference")  as null|anything in GLOB.facial_hairstyles_list
+					new_facial_hairstyle = input(user, "Choose your character's facial-hairstyle:", "Character Preference")  as null|anything in facial_hairstyles_list	
 					if(new_facial_hairstyle)
 						facial_hairstyle = new_facial_hairstyle
 
 				if("next_facehairstyle")
-					if (gender == MALE)
-						facial_hairstyle = next_list_item(facial_hairstyle, GLOB.facial_hairstyles_male_list)
-					else if(gender == FEMALE)
-						facial_hairstyle = next_list_item(facial_hairstyle, GLOB.facial_hairstyles_female_list)
-					else
-						facial_hairstyle = next_list_item(facial_hairstyle, GLOB.facial_hairstyles_list)
+					facial_hairstyle = next_list_item(facial_hairstyle, facial_hairstyles_list)
 
 				if("previous_facehairstyle")
-					if (gender == MALE)
-						facial_hairstyle = previous_list_item(facial_hairstyle, GLOB.facial_hairstyles_male_list)
-					else if (gender == FEMALE)
-						facial_hairstyle = previous_list_item(facial_hairstyle, GLOB.facial_hairstyles_female_list)
-					else
-						facial_hairstyle = previous_list_item(facial_hairstyle, GLOB.facial_hairstyles_list)
+					facial_hairstyle = previous_list_item(facial_hairstyle, facial_hairstyles_list)
 
 				if("hair_gradient")
 					var/new_hair_gradient_color = input(user, "Choose your character's hair gradient colour:", "Character Preference","#"+features["grad_color"]) as color|null
@@ -1878,11 +1922,29 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_tail)
 						features["tail_human"] = new_tail
 
+				if("tail_vulp")
+					var/new_tail
+					new_tail = input(user, "Choose your character's tail:", "Character Preference") as null|anything in GLOB.tails_list_vulp
+					if(new_tail)
+						features["tail_vulp"] = new_tail
+
+				if("tail_vulp_marks")
+					var/new_marks
+					new_marks = input(user, "Choose your character's tail markings:", "Character Preference") as null|anything in list("None","Fade","Tip")
+					if(new_marks)
+						features["tail_vulp_marks"] = new_marks
+
 				if("face_markings")
 					var/new_face_markings
 					new_face_markings = input(user, "Choose your character's face markings:", "Character Preference") as null|anything in GLOB.face_markings_list
 					if(new_face_markings)
 						features["face_markings"] = new_face_markings
+
+				if("head_marking_vulp")
+					var/new_head_markings
+					new_head_markings = input(user, "Choose your character's head markings:", "Character Preference") as null|anything in GLOB.vulpkanin_head_markings_list
+					if(new_head_markings)
+						features["head_marking_vulp"] = new_head_markings
 
 				if("horns")
 					var/new_horns
@@ -1919,6 +1981,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					new_body_markings = input(user, "Choose your character's body markings:", "Character Preference") as null|anything in GLOB.body_markings_list
 					if(new_body_markings)
 						features["body_markings"] = new_body_markings
+
+				if("body_marking_vulp")
+					var/new_body_markings
+					new_body_markings = input(user, "Choose your character's body markings:", "Character Preference") as null|anything in GLOB.vulpkanin_body_markings_list
+					if(new_body_markings)
+						features["body_marking_vulp"] = new_body_markings
 
 				if("legs")
 					var/new_legs

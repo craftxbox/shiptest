@@ -586,9 +586,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			facialhair_hidden = TRUE
 
 	if(H.facial_hairstyle && (FACEHAIR in species_traits) && !facialhair_hidden)
-		S = GLOB.facial_hairstyles_list[H.facial_hairstyle]
+		var/list/facial_hairstyles_list = GLOB.facial_hairstyles_list.Copy()
+		if(H.dna.species.id == SPECIES_VULPKANIN)
+			facial_hairstyles_list += GLOB.vulpkanin_facial_hair_list
+		
+		S = facial_hairstyles_list[H.facial_hairstyle]
 		if(S)
-
 			var/mutable_appearance/facial_overlay = mutable_appearance(S.icon, S.icon_state, -HAIR_LAYER)
 
 			if(!forced_colour)
@@ -627,7 +630,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				hair_overlay.icon_state = "debrained"
 
 		else if(H.hairstyle && (HAIR in species_traits))
-			S = GLOB.hairstyles_list[H.hairstyle]
+			var/list/hairstyles_list = GLOB.hairstyles_list.Copy()
+
+			if(H.dna.species.id == SPECIES_VULPKANIN)
+				hairstyles_list += GLOB.vulpkanin_hairstyles_list
+
+			S = hairstyles_list[H.hairstyle]
+
 			if(S)
 
 				var/hair_state = S.icon_state
@@ -809,6 +818,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
 			bodyparts_to_add -= "tail_human"
 
+	if("tail_vulp" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_vulp"
+
+	if("tail_vulp_marks" in mutant_bodyparts)
+		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "tail_vulp_marks"
+
 	if("waggingtail_human" in mutant_bodyparts)
 		if(H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
 			bodyparts_to_add -= "waggingtail_human"
@@ -976,6 +993,20 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					S = GLOB.tails_list_elzu[H.dna.features["tail_elzu"]]
 				if("waggingtail_elzu")
 					S = GLOB.animated_tails_list_elzu[H.dna.features["tail_elzu"]]
+				if("tail_vulp")
+					S = GLOB.tails_list_vulp[H.dna.features["tail_vulp"]]
+				if("tail_vulp_marks")
+					if(H.dna.features["tail_vulp_marks"] == "None")
+						S = GLOB.tails_list_vulp_marks["None"]
+					else
+						S = GLOB.tails_list_vulp_marks[H.dna.features["tail_vulp"] + " " + H.dna.features["tail_vulp_marks"]]
+				//if("waggingtail_vulp") maybe some day
+				if("body_marking_vulp")
+					S = GLOB.vulpkanin_body_markings_list[H.dna.features["body_marking_vulp"]]
+				if("head_marking_vulp")
+					S = GLOB.vulpkanin_head_markings_list[H.dna.features["head_marking_vulp"]]
+
+
 			if(!S || S.icon_state == "none")
 				continue
 
@@ -983,9 +1014,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 			//A little rename so we don't have to use tail_lizard, tail_human, or tail_elzu when naming the sprites.
 			accessory_overlay.alpha = S.image_alpha
-			if(bodypart == "tail_lizard" || bodypart == "tail_human" || bodypart == "tail_elzu")
+			if(bodypart == "tail_lizard" || bodypart == "tail_human" || bodypart == "tail_elzu" || bodypart == "tail_vulp")
 				bodypart = "tail"
-			else if(bodypart == "waggingtail_lizard" || bodypart == "waggingtail_human" || bodypart == "waggingtail_elzu")
+			else if(bodypart == "waggingtail_lizard" || bodypart == "waggingtail_human" || bodypart == "waggingtail_elzu" || bodypart == "waggingtail_vulp")
 				bodypart = "waggingtail"
 
 			var/used_color_src = S.color_src

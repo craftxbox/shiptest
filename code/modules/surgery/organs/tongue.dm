@@ -412,6 +412,27 @@
 	. = ..()
 	languages_possible = languages_possible_kepi
 
+/obj/item/organ/tongue/vulpkanin
+	say_mod = "rawrs"
+	var/static/list/languages_possible_vulpkanin = typecacheof(list(
+		/datum/language/common,
+		/datum/language/draconic,
+		/datum/language/codespeak,
+		/datum/language/monkey,
+		/datum/language/narsie,
+		/datum/language/beachbum,
+		/datum/language/aphasia,
+		/datum/language/piratespeak,
+		/datum/language/moffic,
+		/datum/language/sylvan,
+		/datum/language/shadowtongue,
+		/datum/language/canilunzt
+	))
+
+/obj/item/organ/tongue/vulpkanin/Initialize(mapload)
+	. = ..()
+	languages_possible = languages_possible_vulpkanin
+
 /obj/item/organ/tongue/vox
 	name = "hindtongue"
 	desc = "Some kind of severed bird tongue."

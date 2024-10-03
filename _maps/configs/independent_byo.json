@@ -23,5 +23,6 @@
 			"slots": 4
 		}
 	},
-	"enabled": true
+	"enabled": true,
+	"space_spawn": true
 }

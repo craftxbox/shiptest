@@ -504,17 +504,26 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	randomise = SANITIZE_LIST(randomise)
 
+
+	var/list/hairstyles_list = GLOB.hairstyles_list.Copy()
+	var/list/facial_hairstyles_list = GLOB.facial_hairstyles_list.Copy()
 	if(gender == MALE)
-		hairstyle								= sanitize_inlist(hairstyle, GLOB.hairstyles_male_list)
-		facial_hairstyle						= sanitize_inlist(facial_hairstyle, GLOB.facial_hairstyles_male_list)
+		hairstyles_list = GLOB.hairstyles_male_list.Copy()
+		facial_hairstyles_list = GLOB.facial_hairstyles_male_list.Copy()
 	else if(gender == FEMALE)
-		hairstyle								= sanitize_inlist(hairstyle, GLOB.hairstyles_female_list)
-		facial_hairstyle						= sanitize_inlist(facial_hairstyle, GLOB.facial_hairstyles_female_list)
+		hairstyles_list = GLOB.hairstyles_female_list.Copy()
+		facial_hairstyles_list = GLOB.facial_hairstyles_female_list.Copy()
 	else
-		hairstyle								= sanitize_inlist(hairstyle, GLOB.hairstyles_list)
-		facial_hairstyle						= sanitize_inlist(facial_hairstyle, GLOB.facial_hairstyles_list)
 		underwear								= sanitize_inlist(underwear, GLOB.underwear_list)
-		undershirt 								= sanitize_inlist(undershirt, GLOB.undershirt_list)
+		undershirt 								= sanitize_inlist(undershirt, GLOB.undershirt_list) 
+
+	if(pref_species.id == SPECIES_VULPKANIN)
+		hairstyles_list += GLOB.vulpkanin_hairstyles_list
+		facial_hairstyles_list += GLOB.vulpkanin_facial_hair_list
+
+	hairstyle								= sanitize_inlist(hairstyle, hairstyles_list)
+	facial_hairstyle						= sanitize_inlist(facial_hairstyle, facial_hairstyles_list)
+		
 
 	socks				= sanitize_inlist(socks, GLOB.socks_list)
 	age					= sanitize_integer(age, pref_species.species_age_min, pref_species.species_age_max, initial(age))
@@ -562,6 +571,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["vox_neck_quills"]			= sanitize_inlist(features["vox_neck_quills"], GLOB.vox_neck_quills_list, "None")
 	features["elzu_horns"]				= sanitize_inlist(features["elzu_horns"], GLOB.elzu_horns_list)
 	features["tail_elzu"]				= sanitize_inlist(features["tail_elzu"], GLOB.tails_list_elzu)
+	features["tail_vulp"]				= sanitize_inlist(features["tail_vulp"], GLOB.tails_list_vulp)
+	features["tail_vulp_marks"]			= sanitize_inlist(features["tail_vulp_marks"], GLOB.tails_list_vulp_marks)
+	features["head_marking_vulp"]	= sanitize_inlist(features["head_marking_vulp"], GLOB.vulpkanin_head_markings_list)
+	features["body_marking_vulp"]	= sanitize_inlist(features["body_marking_vulp"], GLOB.vulpkanin_body_markings_list)
+	// features["vulpkanin_facial_hair"]	= sanitize_inlist(features["vulpkanin_facial_hair"], GLOB.vulpkanin_facial_hair_list)
 	features["flavor_text"]				= sanitize_text(features["flavor_text"], initial(features["flavor_text"]))
 
 	all_quirks = SANITIZE_LIST(all_quirks)
@@ -643,6 +657,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_vox_neck_quills"]		, features["vox_neck_quills"])
 	WRITE_FILE(S["feature_elzu_horns"]			, features["elzu_horns"])
 	WRITE_FILE(S["feature_tail_elzu"]			, features["tail_elzu"])
+	WRITE_FILE(S["feature_tail_vulp"]			, features["tail_vulp"])
+	WRITE_FILE(S["feature_tail_vulp_marks"]		, features["tail_vulp_marks"])
+	WRITE_FILE(S["feature_head_marking_vulp"]	, features["head_marking_vulp"])
+	WRITE_FILE(S["feature_body_marking_vulp"]	, features["body_marking_vulp"])
 	WRITE_FILE(S["fbp"]							, fbp)
 
 	//Flavor text
