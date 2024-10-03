@@ -1390,3 +1390,6 @@
 
 /mob/living/carbon/human/species/lizard/ashwalker/kobold
 	race = /datum/species/lizard/ashwalker/kobold
+
+/mob/living/carbon/human/species/vulpkanin
+	race = /datum/species/vulpkanin

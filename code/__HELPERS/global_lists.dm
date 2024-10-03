@@ -49,6 +49,13 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/elzu_horns,GLOB.elzu_horns_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/elzu, GLOB.tails_list_elzu)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails_animated/elzu, GLOB.animated_tails_list_elzu)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/vulpkanin, GLOB.tails_list_vulp)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/tail_markings, GLOB.tails_list_vulp_marks)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/head_markings, GLOB.vulpkanin_head_markings_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/facial_hair, GLOB.vulpkanin_facial_hair_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/hair, GLOB.vulpkanin_hairstyles_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/body_markings, GLOB.vulpkanin_body_markings_list)
+
 
 	//Species
 	for(var/spath in subtypesof(/datum/species))

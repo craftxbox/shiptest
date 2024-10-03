@@ -194,3 +194,88 @@
 		H.dna.species.mutant_bodyparts -= "tail_human"
 		color = H.hair_color
 		H.update_body()
+
+/obj/item/organ/tail/vulpkanin
+	name = "\improper Vulpkanin tail"
+	desc = "A severed Vulpkanin tail."
+	icon_state = "severedfox"
+	var/marking_type = "None"
+
+/obj/item/organ/tail/vulpkanin/fluffy
+	tail_type = "Fluffy"
+
+/obj/item/organ/tail/vulpkanin/fluffy/tip
+	marking_type = "Tip"
+
+/obj/item/organ/tail/vulpkanin/fluffy/fade
+	marking_type = "Fade"
+
+/obj/item/organ/tail/vulpkanin/ninesune
+	desc = "A severed Vulpkanin tail. There are nine of them for some reason..."
+	tail_type = "Nine Sune"
+
+/obj/item/organ/tail/vulpkanin/ninesune/tip
+	marking_type = "Tip"
+
+/obj/item/organ/tail/vulpkanin/ninesune/fade
+	marking_type = "Fade"
+
+/obj/item/organ/tail/vulpkanin/paintbrush
+	desc = "A severed Vulpkanin tail. It reminds you of a paintbrush."
+	tail_type = "Paintbrush"
+
+/obj/item/organ/tail/vulpkanin/paintbrush/tip
+	marking_type = "Tip"
+
+/obj/item/organ/tail/vulpkanin/paintbrush/fade
+	marking_type = "Fade"
+
+/obj/item/organ/tail/vulpkanin/sevensune
+	desc = "A severed Vulpkanin tail. There are seven of them for some reason..."
+	tail_type = "Seven Sune"
+
+/obj/item/organ/tail/vulpkanin/sevensune/tip
+	marking_type = "Tip"
+
+/obj/item/organ/tail/vulpkanin/sevensune/fade
+	marking_type = "Fade"
+
+/obj/item/organ/tail/vulpkanin/sleek
+	desc = "A severed Vulpkanin tail. It's sleek and shiny."
+	tail_type = "Sleek"
+
+/obj/item/organ/tail/vulpkanin/sleek/tip
+	marking_type = "Tip"
+
+/obj/item/organ/tail/vulpkanin/sleek/fade
+	marking_type = "Fade"
+
+/obj/item/organ/tail/vulpkanin/up
+	desc = "A severed Vulpkanin tail. It looks like it's curved upwards."
+	tail_type = "Up"
+
+/obj/item/organ/tail/vulpkanin/up/tip
+	marking_type = "Tip"
+
+/obj/item/organ/tail/vulpkanin/up/fade
+	marking_type = "Fade"
+
+/obj/item/organ/tail/vulpkanin/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
+	..()
+	if(istype(H))
+		if(!("tail_vulp" in H.dna.species.mutant_bodyparts))
+			H.dna.species.mutant_bodyparts |= "tail_vulp"
+			H.dna.species.mutant_bodyparts |= "tail_vulp_marks"
+			H.dna.features["tail_vulp"] = tail_type
+			H.dna.features["tail_vulp_marks"] = marking_type
+			H.update_body()
+
+/obj/item/organ/tail/vulpkanin/Remove(mob/living/carbon/human/H,  special = 0)
+	..()
+	if(istype(H))
+		H.dna.features["tail_vulp"] = "None"
+		H.dna.features["tail_vulp_marks"] = "None"
+		H.dna.species.mutant_bodyparts -= "tail_vulp"
+		H.dna.species.mutant_bodyparts -= "tail_vulp_marks"
+		color = H.hair_color
+		H.update_body()

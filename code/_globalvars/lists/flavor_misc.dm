@@ -53,6 +53,13 @@ GLOBAL_LIST_EMPTY(vox_neck_quills_list)
 GLOBAL_LIST_EMPTY(elzu_horns_list)
 GLOBAL_LIST_EMPTY(tails_list_elzu)
 GLOBAL_LIST_EMPTY(animated_tails_list_elzu)
+GLOBAL_LIST_EMPTY(tails_list_vulp)
+GLOBAL_LIST_EMPTY(tails_list_vulp_marks)
+GLOBAL_LIST_EMPTY(vulpkanin_head_markings_list)
+GLOBAL_LIST_EMPTY(vulpkanin_hairstyles_list)
+GLOBAL_LIST_EMPTY(vulpkanin_facial_hair_list)
+GLOBAL_LIST_EMPTY(vulpkanin_body_markings_list)
+
 
 GLOBAL_LIST_INIT(color_list_ethereal, list(
 	"Red" = "ff4d4d",

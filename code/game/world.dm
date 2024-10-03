@@ -324,10 +324,10 @@ GLOBAL_VAR(restart_counter)
 
 	var/players = GLOB.clients.len
 
-	var/popcaptext = ""
-	var/popcap = max(CONFIG_GET(number/extreme_popcap), CONFIG_GET(number/hard_popcap), CONFIG_GET(number/soft_popcap))
-	if (popcap)
-		popcaptext = "/[popcap]"
+	// var/popcaptext = ""
+	// var/popcap = max(CONFIG_GET(number/extreme_popcap), CONFIG_GET(number/hard_popcap), CONFIG_GET(number/soft_popcap))
+	// if (popcap)
+	// 	popcaptext = "/[popcap]"
 
 	// if (players > 1)
 	// 	features += "[players][popcaptext] players"

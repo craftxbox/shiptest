@@ -44,6 +44,18 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/human, GLOB.tails_list_human)
 	if(!GLOB.tails_list_lizard.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/lizard, GLOB.tails_list_lizard)
+	if(!GLOB.tails_list_vulp.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/vulpkanin, GLOB.tails_list_vulp)
+	if(!GLOB.tails_list_vulp_marks.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/tail_markings, GLOB.tails_list_vulp_marks)
+	if(!GLOB.vulpkanin_hairstyles_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/hair, GLOB.vulpkanin_hairstyles_list)
+	if(!GLOB.vulpkanin_head_markings_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/head_markings, GLOB.vulpkanin_head_markings_list)
+	if(!GLOB.vulpkanin_facial_hair_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/facial_hair, GLOB.vulpkanin_facial_hair_list)
+	if(!GLOB.vulpkanin_body_markings_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/vulpkanin/body_markings, GLOB.vulpkanin_body_markings_list)
 	if(!GLOB.face_markings_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/face_markings, GLOB.face_markings_list)
 	if(!GLOB.horns_list.len)
@@ -125,6 +137,8 @@
 		"tail_human" = "None",
 		"tail_lizard" = pick(GLOB.tails_list_lizard),
 		"tail_elzu" = pick(GLOB.tails_list_elzu),
+		"tail_vulp" = pick(GLOB.tails_list_vulp),
+		"tail_vulp_marks" = pick(GLOB.tails_list_vulp_marks),
 		"vox_head_quills" = pick(GLOB.vox_head_quills_list),
 		"vox_neck_quills" = pick(GLOB.vox_neck_quills_list),
 		"wings" = "None",

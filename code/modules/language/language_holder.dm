@@ -448,6 +448,11 @@ GLOBAL_LIST_INIT(prototype_language_holders, init_language_holder_prototypes())
 /datum/language_holder/gal_com
 	understood_languages = list(/datum/language/galactic_common = list(LANGUAGE_ATOM))
 	spoken_languages = list(/datum/language/galactic_common = list(LANGUAGE_ATOM))
+/datum/language_holder/vulpkanin
+	understood_languages = list(/datum/language/galactic_common = list(LANGUAGE_ATOM),
+								/datum/language/canilunzt = list(LANGUAGE_ATOM))
+	spoken_languages = list(/datum/language/galactic_common = list(LANGUAGE_ATOM),
+							/datum/language/canilunzt = list(LANGUAGE_ATOM))
 
 /datum/language_holder/empty
 	understood_languages = list()
