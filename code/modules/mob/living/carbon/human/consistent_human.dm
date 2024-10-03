@@ -38,6 +38,10 @@
 	dna.features["tail_elzu"] = GLOB.tails_list_elzu[hex2num(copytext(seed, 17, 18)) % length(GLOB.tails_list_elzu) + 1]
 	dna.features["ipc_chassis"] = GLOB.ipc_chassis_list[hex2num(copytext(seed, 18, 19)) % length(GLOB.ipc_chassis_list) + 1]
 	dna.features["ipc_screen"] = GLOB.ipc_screens_list[hex2num(copytext(seed, 19, 20)) % length(GLOB.ipc_screens_list) + 1]
+	dna.features["tail_vulp"] = GLOB.tails_list_vulp[hex2num(copytext(seed, 20, 21)) % length(GLOB.tails_list_vulp) + 1]
+	dna.features["tail_vulp_marks"] = GLOB.tails_list_vulp_marks[hex2num(copytext(seed, 21, 22)) % length(GLOB.tails_list_vulp_marks) + 1]
+	dna.features["vulpkanin_head_markings"] = GLOB.vulpkanin_head_markings_list[hex2num(copytext(seed, 22, 23)) % length(GLOB.vulpkanin_head_markings_list) + 1]
+	dna.features["vulpkanin_body_markings"] = GLOB.vulpkanin_body_markings_list[hex2num(copytext(seed, 23, 24)) % length(GLOB.vulpkanin_body_markings_list) + 1]
 
 	if(!species_list)
 		species_list = GLOB.species_list
