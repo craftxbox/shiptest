@@ -415,7 +415,10 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 #define TGS_OOC_USAGE "Usage: ooc <message>"
 /proc/TgsOoc(msg,sender)
-	var/keyname = "<font color='green'><i>[sender]</i></font>"
+	var/keyname = "<font color='green'><i title='This user is connected to IRC and may not be in game.'>[sender]</i></font>"
+
+	var/message = strip_html(msg) // Why this is needed: https://transfur.science/ql46uynr
+
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
 	for(var/client/C in GLOB.clients)
 		if(C.prefs.chat_toggles & CHAT_OOC)
