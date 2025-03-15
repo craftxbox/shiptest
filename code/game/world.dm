@@ -321,6 +321,9 @@ GLOBAL_VAR(restart_counter)
 	s += "Github"
 	s += "</a>"
 	s += ")"
+	s += "<br/>"
+	s += "<b>Round Time:</b>&nbsp;"
+	s += "[REALTIMEOFDAY - SSticker.round_start_timeofday > MIDNIGHT_ROLLOVER ? "[round((REALTIMEOFDAY - SSticker.round_start_timeofday)/MIDNIGHT_ROLLOVER)] Days, [time2text(world.timeofday - SSticker.round_start_timeofday, "hh:mm:ss", 0)]" : time2text(world.timeofday - SSticker.round_start_timeofday, "hh:mm:ss", 0)]"
 
 	var/players = GLOB.clients.len
 
