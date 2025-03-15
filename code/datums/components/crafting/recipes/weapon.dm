@@ -13,7 +13,7 @@
 /datum/crafting_recipe/strobeshield
 	name = "Strobe Shield"
 	result = /obj/item/shield/riot/flash
-	reqs = list(/obj/item/wallframe/flasher = 1,
+	reqs = list(/obj/item/stack/cable_coil = 1,
 				/obj/item/assembly/flash/handheld = 1,
 				/obj/item/shield/riot = 1)
 	time = 40
@@ -26,7 +26,7 @@
 
 /datum/crafting_recipe/molotov
 	name = "Molotov"
-	result = /obj/item/reagent_containers/food/drinks/bottle/molotov
+	result = /obj/item/reagent_containers/food/drinks/molotov
 	reqs = list(/obj/item/reagent_containers/glass/rag = 1,
 				/obj/item/reagent_containers/food/drinks/bottle = 1)
 	parts = list(/obj/item/reagent_containers/food/drinks/bottle = 1)

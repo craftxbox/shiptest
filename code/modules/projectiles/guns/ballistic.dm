@@ -16,6 +16,11 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	has_safety = TRUE
 	safety = TRUE
+	// when we load the gun, should it instantly chamber the next round?
+	var/always_chambers = FALSE
+
+	///If you can examine a gun to see its current ammo count
+	var/ammo_counter = FALSE
 
 	min_recoil = 0.1
 
@@ -23,7 +28,10 @@
 		/obj/item/attachment/silencer,
 		/obj/item/attachment/laser_sight,
 		/obj/item/attachment/rail_light,
-		/obj/item/attachment/bayonet
+		/obj/item/attachment/bayonet,
+		/obj/item/attachment/gun,
+		/obj/item/attachment/sling,
+		/obj/item/attachment/ammo_counter
 	)
 	slot_available = list(
 		ATTACHMENT_SLOT_MUZZLE = 1,
@@ -42,6 +50,9 @@
 
 /obj/item/gun/ballistic/Initialize(mapload, spawn_empty)
 	. = ..()
+
+	allowed_ammo_types = typecacheof(allowed_ammo_types) - blacklisted_ammo_types
+
 	if(spawn_empty)
 		if(internal_magazine)
 			spawn_no_ammo = TRUE
@@ -214,10 +225,8 @@
 	return chambered
 
 /obj/item/gun/ballistic/attackby(obj/item/A, mob/user, params)
-	. = ..()
-
-	if(.)
-		return
+	if(..())
+		return FALSE
 
 	if(sealed_magazine)
 		to_chat(user, span_warning("The [magazine_wording] on [src] is sealed and cannot be reloaded!"))
@@ -235,14 +244,14 @@
 
 	if(istype(A, /obj/item/ammo_casing) || istype(A, /obj/item/ammo_box))
 		if (bolt_type == BOLT_TYPE_NO_BOLT || internal_magazine)
-			if (chambered && !chambered.BB)
+			if ((chambered && !chambered.BB) || (chambered && always_chambers))
 				chambered.on_eject(shooter = user)
 				chambered = null
 			var/num_loaded = magazine.attackby(A, user, params)
 			if (num_loaded)
 				to_chat(user, "<span class='notice'>You load [num_loaded] [cartridge_wording]\s into \the [src].</span>")
 				playsound(src, load_sound, load_sound_volume, load_sound_vary)
-				if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
+				if ((chambered == null && bolt_type == BOLT_TYPE_NO_BOLT) || always_chambers)
 					chamber_round()
 				A.update_appearance()
 				update_appearance()
@@ -286,7 +295,8 @@
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/gun/ballistic/attack_hand(mob/user)
-	if(user.is_holding(src) && loc == user)
+	// the main calls it's own eject mag before the underbarrel. fix this
+	if(user.is_holding(src) && loc == user && !(gun_firemodes[firemode_index] == FIREMODE_UNDERBARREL))
 		if(sealed_magazine)
 			to_chat(user, span_warning("The [magazine_wording] on [src] is sealed and cannot be accessed!"))
 			return
@@ -333,11 +343,15 @@
 
 /obj/item/gun/ballistic/examine(mob/user)
 	. = ..()
-	var/count_chambered = !(bolt_type == BOLT_TYPE_NO_BOLT || bolt_type == BOLT_TYPE_OPEN)
-	. += "It has [get_ammo(count_chambered)] round\s remaining."
-	if (!chambered)
+	if(ammo_counter)
+		var/count_chambered = !(bolt_type == BOLT_TYPE_NO_BOLT || bolt_type == BOLT_TYPE_OPEN)
+		. += span_notice("It has <b>[get_ammo(count_chambered)]</b> round\s remaining.")
+
+/obj/item/gun/ballistic/examine_more(mob/user)
+	. = ..()
+	if(!chambered)
 		. += "It does not seem to have a round chambered."
-	if (bolt_locked)
+	if(bolt_locked)
 		. += "The [bolt_wording] is locked back and needs to be released before firing."
 	if(bolt_type != BOLT_TYPE_NO_BOLT)
 		. += "You can [bolt_wording] [src] by pressing the <b>unique action</b> key. By default, this is <b>space</b>"

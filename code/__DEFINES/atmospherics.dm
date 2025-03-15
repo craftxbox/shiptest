@@ -157,9 +157,9 @@
 /// (kPa) What pressure pumps and powered equipment max out at.
 #define MAX_OUTPUT_PRESSURE 4500
 /// (L/s) Maximum speed powered equipment can work at.
-#define MAX_TRANSFER_RATE 200
-/// 10% of an overclocked volume pump leaks into the air
-#define VOLUME_PUMP_LEAK_AMOUNT 0.1
+#define MAX_TRANSFER_RATE 400
+/// How many percent of the contents that an overclocked volume pumps leak into the air
+#define VOLUME_PUMP_LEAK_AMOUNT 0.2
 //used for device_type vars
 #define UNARY 1
 #define BINARY 2
@@ -210,8 +210,6 @@
 #define KITCHEN_COLDROOM_ATMOS "o2=33;n2=124;TEMP=193.15"
 /// used in the holodeck burn test program
 #define BURNMIX_ATMOS "o2=2500;plasma=5000;TEMP=370"
-/// used in rockplanet
-#define ROCKPLANET_DEFAULT_ATMOS "co2=95;n2=3;TEMP=210.15"
 //ATMOSPHERICS DEPARTMENT GAS TANK TURFS
 #define ATMOS_TANK_N2O "n2o=6000;TEMP=293.15"
 #define ATMOS_TANK_CO2 "co2=50000;TEMP=293.15"
@@ -226,11 +224,16 @@
 //PLANETARY
 /// what pressure you have to be under to increase the effect of equipment meant for lavaland
 #define LAVALAND_EQUIPMENT_EFFECT_PRESSURE 90
-#define ICEMOON_DEFAULT_ATMOS "ICEMOON_ATMOS"
 #define GAS_GIANT_ATMOS "GAS_GIANT_ATMOS"
 #define PLASMA_GIANT_ATMOS "PLASMA_GIANT_ATMOS"
-#define WASTEPLANET_DEFAULT_ATMOS "WASTEPLANET_ATMOS"
+#define DEFAULT_ATMOS_DETECTOR "plasma=70000;TEMP=293.15"
 #define LAVALAND_DEFAULT_ATMOS "LAVALAND_ATMOS"
+#define ICEMOON_DEFAULT_ATMOS "ICEMOON_ATMOS"
+#define WASTEPLANET_DEFAULT_ATMOS "WASTEPLANET_ATMOS"
+#define ROCKPLANET_DEFAULT_ATMOS "ROCKPLANET_ATMOS"
+#define BEACHPLANET_DEFAULT_ATMOS "BEACHPLANET_ATMOS"
+#define JUNGLEPLANET_DEFAULT_ATMOS "JUNGLEPLANET_ATMOS"
+#define SANDPLANET_DEFAULT_ATMOS "SANDPLANET_ATMOS"
 
 
 //ATMOS MIX IDS

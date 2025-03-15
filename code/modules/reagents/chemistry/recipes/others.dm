@@ -110,7 +110,7 @@
 		new /obj/item/soap(location)
 
 /datum/chemical_reaction/omegasoapification
-	required_reagents = list(/datum/reagent/consumable/potato_juice = 10, /datum/reagent/consumable/ethanol/lizardwine = 10, /datum/reagent/monkey_powder = 10, /datum/reagent/drug/krokodil = 10, /datum/reagent/toxin/acid/nitracid = 10, /datum/reagent/baldium = 10, /datum/reagent/consumable/ethanol/hooch = 10, /datum/reagent/bluespace = 10, /datum/reagent/drug/pumpup = 10, /datum/reagent/consumable/space_cola = 10)
+	required_reagents = list(/datum/reagent/consumable/potato_juice = 10, /datum/reagent/consumable/ethanol/lizardwine = 10, /datum/reagent/monkey_powder = 10, /datum/reagent/toxin/acid/nitracid = 10, /datum/reagent/baldium = 10, /datum/reagent/consumable/ethanol/hooch = 10, /datum/reagent/bluespace = 10, /datum/reagent/drug/pumpup = 10, /datum/reagent/consumable/space_cola = 10)
 	required_temp = 999
 	mob_react = FALSE
 
@@ -611,7 +611,7 @@
 	mix_message = "The mixture rapidly condenses and darkens in color..."
 
 /datum/chemical_reaction/cellulose_carbonization/ash		// Sub for cellulose
-	required_reagents = list(/datum/reagent/ash_fibers)
+	required_reagents = list(/datum/reagent/ash_fibers = 1)
 
 /datum/chemical_reaction/fervor
 	results = list(/datum/reagent/consumable/fervor = 10)

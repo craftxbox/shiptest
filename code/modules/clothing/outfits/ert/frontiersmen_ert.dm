@@ -1,5 +1,6 @@
 /datum/outfit/job/frontiersmen/ert //most basic of grunts
 	name = "ERT - Frontiersman Basic"
+	jobtype = /datum/job/officer
 
 	head = /obj/item/clothing/head/beret/sec/frontier
 	suit = /obj/item/clothing/suit/armor/vest/bulletproof
@@ -186,7 +187,7 @@
 	back = /obj/item/storage/backpack/satchel/leather
 	suit = /obj/item/clothing/suit/armor/frontier
 	suit_store = null
-	belt = /obj/item/gun/ballistic/automatic/pistol/deagle
+	belt = /obj/item/gun/ballistic/automatic/pistol/mauler
 
 	backpack_contents = list(/obj/item/clothing/mask/gas/frontiersmen, /obj/item/ammo_box/magazine/m50=2, /obj/item/binoculars=1, /obj/item/melee/knife/survival)
 
@@ -195,9 +196,8 @@
 
 	suit = /obj/item/clothing/suit/armor/vest/marine/frontier
 	head = /obj/item/clothing/head/helmet/bulletproof/x11/frontier
-	mask = /obj/item/clothing/mask/gas/sechailer
-	belt = /obj/item/gun/ballistic/automatic/pistol/deagle/gold // daring today aren't we
-
+	mask = /obj/item/clothing/mask/breath
+	belt = /obj/item/gun/ballistic/automatic/pistol/mauler
 	backpack = /obj/item/minigunpack
 	satchel = /obj/item/minigunpack
 	courierbag = /obj/item/minigunpack
@@ -273,7 +273,7 @@
 /datum/outfit/job/frontiersmen/ert/sentry
 	name = "ERT - Frontiersman Sentry (SKM-24v LMG)"
 
-	head = /obj/item/clothing/head/helmet/marine/frontier
+	head = /obj/item/clothing/head/helmet/frontier
 	mask = /obj/item/clothing/mask/balaclava
 	suit = /obj/item/clothing/suit/armor/vest/marine/frontier
 	suit_store = /obj/item/gun/ballistic/automatic/hmg/skm_lmg/drum_mag

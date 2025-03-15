@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 /datum/hallucination/proc/wake_and_restore()
 	target.set_screwyhud(SCREWYHUD_NONE)
-	target.SetSleeping(0)
+	target.set_sleeping(0)
 
 /datum/hallucination/Destroy()
 	target.investigate_log("was afflicted with a hallucination of type [type] by [natural?"hallucination status":"an external source"]. [feedback_details]", INVESTIGATE_HALLUCINATIONS)
@@ -195,7 +195,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	next_expand = world.time + FAKE_FLOOD_EXPAND_TIME
 	START_PROCESSING(SSobj, src)
 
-/datum/hallucination/fake_flood/process()
+/datum/hallucination/fake_flood/process(seconds_per_tick)
 	if(next_expand <= world.time)
 		radius++
 		if(radius > FAKE_FLOOD_MAX_RADIUS)
@@ -1148,8 +1148,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-/obj/effect/hallucination/danger/anomaly/process()
-	if(prob(70))
+/obj/effect/hallucination/danger/anomaly/process(seconds_per_tick)
+	if(SPT_PROB(45, seconds_per_tick))
 		step(src,pick(GLOB.alldirs))
 
 /obj/effect/hallucination/danger/anomaly/Destroy()
@@ -1265,7 +1265,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	target.playsound_local(get_turf(src), "sparks", 100, 1)
 	target.staminaloss += 50
 	target.Stun(40)
-	target.jitteriness += 1000
+	target.adjust_jitter(1000, max = 1500)
 	target.do_jitter_animation(target.jitteriness)
 	addtimer(CALLBACK(src, PROC_REF(shock_drop)), 20)
 

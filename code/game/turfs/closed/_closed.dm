@@ -149,23 +149,10 @@
 		add_dent(WALL_DENT_SHOT)
 		alter_integrity(-dam, shooter)
 
-/turf/closed/proc/get_item_damage(obj/item/I, t_min = min_dam)
-	var/dam = I.force
-	if(istype(I, /obj/item/clothing/gloves/gauntlets))
-		dam = 20
-	else if(I.tool_behaviour == TOOL_MINING)
-		dam *= (4/3)
-	else
-		switch(I.damtype)
-			if(BRUTE)
-				if(I.get_sharpness())
-					dam *= 2/3
-			if(BURN)
-				dam *= burn_mod
-			else
-				return 0
+/turf/closed/proc/get_item_damage(obj/item/used_item, t_min = min_dam)
+	var/damage = used_item.force * used_item.demolition_mod
 	// if dam is below t_min, then the hit has no effect
-	return (dam < t_min ? 0 : dam)
+	return (damage < t_min ? 0 : damage)
 
 /turf/closed/proc/get_proj_damage(obj/projectile/P, t_min = min_dam)
 	var/dam = P.damage
@@ -234,23 +221,23 @@
 		return
 
 // catch-all for using most items on the closed turf -- attempt to smash
-/turf/closed/proc/try_destroy(obj/item/W, mob/user, turf/T)
-	var/dam = get_item_damage(W)
+/turf/closed/proc/try_destroy(obj/item/used_item, mob/user, turf/T)
+	var/total_damage = get_item_damage(used_item)
 	user.do_attack_animation(src)
-	if(!dam)
-		to_chat(user, "<span class='warning'>[W] isn't strong enough to damage [src]!</span>")
+	if(total_damage <= 0)
+		to_chat(user, "<span class='warning'>[used_item] isn't strong enough to damage [src]!</span>")
 		playsound(src, 'sound/weapons/tap.ogg', 50, TRUE)
 		return TRUE
-	log_combat(user, src, "attacked", W)
-	user.visible_message("<span class='danger'>[user] hits [src] with [W]!</span>", \
-				"<span class='danger'>You hit [src] with [W]!</span>", null, COMBAT_MESSAGE_RANGE)
-	switch(W.damtype)
+	log_combat(user, src, "attacked", used_item)
+	user.visible_message(span_danger("[user] hits [src] with [used_item]!"), \
+				span_danger("You hit [src] with [used_item]!</span>"), null, COMBAT_MESSAGE_RANGE)
+	switch(used_item.damtype)
 		if(BRUTE)
 			playsound(src,attack_hitsound, 100, TRUE)
 		if(BURN)
 			playsound(src, 'sound/items/welder.ogg', 100, TRUE)
 	add_dent(WALL_DENT_HIT)
-	alter_integrity(-dam, user)
+	alter_integrity(-total_damage, user)
 	return TRUE
 
 /turf/closed/proc/try_decon(obj/item/I, mob/user, turf/T)
@@ -271,6 +258,9 @@
 
 /turf/closed/deconstruct_act(mob/living/user, obj/item/I)
 	var/act_duration = breakdown_duration
+	if(breakdown_duration == -1)
+		to_chat(user, span_warning("[src] cannot be deconstructed!"))
+		return FALSE
 	if(!I.tool_start_check(user, amount=0))
 		return FALSE
 	to_chat(user, "<span class='notice'>You begin slicing through the outer plating...</span>")

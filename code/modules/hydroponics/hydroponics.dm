@@ -106,16 +106,16 @@
 	else
 		return ..()
 
-/obj/machinery/hydroponics/process()
+/obj/machinery/hydroponics/process(seconds_per_tick)
 	var/needs_update = 0 // Checks if the icon needs updating so we don't redraw empty trays every time
-	var/temp_sustain = FALSE	// If we want self_sustaining effects temporarily		// WS edit begin - Crystals
+	var/temp_sustain = FALSE	// If we want self_sustaining effects temporarily
 
 	if(temp_sustain)
-		adjustHealth(20) //yes, this is hacky as fuck. Please change me to copy nutrients from the reagent tank someday.
-		adjustWater(rand(3,5))
-		adjustWeeds(-2)
-		adjustPests(-2)
-		adjustToxic(-2) //WS edit end
+		adjustHealth(10 * seconds_per_tick) //yes, this is hacky as fuck. Please change me to copy nutrients from the reagent tank someday.
+		adjustWater(rand(3,5) * seconds_per_tick * 0.5)
+		adjustWeeds(-1 * seconds_per_tick)
+		adjustPests(-1 * seconds_per_tick)
+		adjustToxic(-1 * seconds_per_tick)
 
 	if(!powered() && self_sustaining)
 		visible_message("<span class='warning'>[name]'s auto-grow functionality shuts off!</span>")
@@ -124,9 +124,9 @@
 		update_appearance()
 
 	else if(self_sustaining)
-		adjustWater(rand(1,2))
-		adjustWeeds(-1)
-		adjustPests(-1)
+		adjustWater(rand(1,2) * seconds_per_tick * 0.5)
+		adjustWeeds(-0.5 * seconds_per_tick)
+		adjustPests(-0.5 * seconds_per_tick)
 
 	if(world.time > (lastcycle + cycledelay))
 		lastcycle = world.time
@@ -570,7 +570,7 @@
 		msg += "Toxicity level: [span_notice("[toxic] / [HYDRO_MAX_TOXIC]")]\n"
 		msg += "Water level: [span_notice("[waterlevel] / [maxwater]")]\n"
 		msg += "Nutrition level: [span_notice("[reagents.total_volume] / [maxnutri]")]\n"
-		to_chat(user, examine_block(msg))
+		to_chat(user, boxed_message(msg))
 		return
 
 	else if(istype(O, /obj/item/cultivator))

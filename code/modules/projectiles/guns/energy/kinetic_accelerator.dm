@@ -17,7 +17,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 
 	muzzleflash_iconstate = "muzzle_flash_light"
-	muzzle_flash_color = COLOR_WHITE
+	light_color = COLOR_WHITE
 
 	var/overheat_time = 16
 	var/holds_charge = FALSE
@@ -251,6 +251,7 @@
 
 /obj/projectile/kinetic/mech
 	range = 5
+	pressure_decrease = 0.5
 
 /obj/projectile/kinetic/mech/strike_thing(atom/target) //has no skill check for mechs
 	var/turf/target_turf = get_turf(target)

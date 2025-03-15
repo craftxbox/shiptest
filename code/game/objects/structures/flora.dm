@@ -830,7 +830,7 @@
 	START_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/structure/flora/tree/chapel/process()
+/obj/structure/flora/tree/chapel/process(seconds_per_tick)
 	if(world.time > (lastcycle + 200))
 		if(abs(karma) > 100)
 			pulseKarma()
@@ -883,7 +883,7 @@
 			else if (isliving(user))
 				var/mob/living/L = user
 				L.Immobilize(100, TRUE)
-				L.jitteriness += 50
+				L.adjust_jitter(50)
 				L.adjustToxLoss(66)
 		return 1
 	else ..()
@@ -1028,7 +1028,7 @@
 	create_reagents(300, OPENCONTAINER)
 	. = ..()
 
-/obj/structure/flora/tree/srm/process()
+/obj/structure/flora/tree/srm/process(seconds_per_tick)
 	if(world.time > (lastcycle + 100))
 		if(reagents.total_volume > 0)
 			var/gainedhealth = 0

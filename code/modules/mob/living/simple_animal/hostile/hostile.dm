@@ -18,8 +18,14 @@
 	var/projectiletype	//set ONLY it and NULLIFY casingtype var, if we have ONLY projectile
 	var/projectilesound
 	var/casingtype		//set ONLY it and NULLIFY projectiletype, if we have projectile IN CASING
-	var/move_to_delay = 3 //delay for the automated movement.
+
+	//spread, set on humans during init by checking what gun they're holding.
+	var/spread = 0
+
+	///delay for the automated movement.
+	var/move_to_delay = 3
 	var/list/friends = list()
+
 	var/list/emote_taunt = list()
 	var/taunt_chance = 0
 
@@ -240,11 +246,11 @@
 
 		if(istype(the_target, /obj/machinery/porta_turret))
 			var/obj/machinery/porta_turret/P = the_target
-			if(P.in_faction(src)) //Don't attack if the turret is in the same faction
-				return FALSE
-			if(P.has_cover &&!P.raised) //Don't attack invincible turrets
+			if(!(P.turret_flags & TURRET_FLAG_SHOOT_FAUNA)) //Don't attack turrets that won't shoot us
 				return FALSE
 			if(P.machine_stat & BROKEN) //Or turrets that are already broken
+				return FALSE
+			if(faction_check(P.faction, faction)) //Or turrets in the same faction
 				return FALSE
 			return TRUE
 
@@ -369,9 +375,10 @@
 
 /mob/living/simple_animal/hostile/proc/Aggro()
 	vision_range = aggro_vision_range
-	if(target && emote_taunt.len && prob(taunt_chance))
-		manual_emote("[pick(emote_taunt)] at [target].")
-		taunt_chance = max(taunt_chance-7,2)
+	if(target)
+		if(emote_taunt.len && prob(taunt_chance))
+			manual_emote("[pick(emote_taunt)] at [target].")
+			taunt_chance = max(taunt_chance-7,2)
 
 
 /mob/living/simple_animal/hostile/proc/LoseAggro()
@@ -435,7 +442,7 @@
 	if(casingtype)
 		var/obj/item/ammo_casing/casing = new casingtype(startloc)
 		playsound(src, projectilesound, 100, TRUE)
-		casing.fire_casing(targeted_atom, src, null, null, null, ran_zone(), 0,  src)
+		casing.fire_casing(targeted_atom, src, null, null, null, ran_zone(), rand(-spread, spread),  src)
 	else if(projectiletype)
 		var/obj/projectile/P = new projectiletype(startloc)
 		playsound(src, projectilesound, 100, TRUE)

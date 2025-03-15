@@ -207,6 +207,9 @@ SUBSYSTEM_DEF(mapping)
 		if(istext(data["prefix"]))
 			S.prefix = data["prefix"]
 
+		if(istext(data["manufacturer"]))
+			S.manufacturer = data["manufacturer"]
+
 		if(istext(data["faction"]))
 			S.faction_path = text2path(data["faction"])
 		if(S.faction_path)
@@ -237,7 +240,7 @@ SUBSYSTEM_DEF(mapping)
 				job_slot = GLOB.name_occupations[job]
 				slots = value
 			else if(islist(value))
-				var/datum/outfit/job_outfit = text2path(value["outfit"])
+				var/datum/outfit/job/job_outfit = text2path(value["outfit"])
 				if(isnull(job_outfit))
 					stack_trace("Invalid job outfit! [value["outfit"]] on [S.name]'s config! Defaulting to assistant clothing.")
 					job_outfit = /datum/outfit/job/assistant

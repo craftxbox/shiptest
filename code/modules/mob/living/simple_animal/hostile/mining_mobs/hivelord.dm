@@ -51,7 +51,8 @@
 	return TRUE
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/spawn_mob_trophy()
-	loot += mob_trophy //we don't butcher
+	if(mob_trophy)
+		loot += mob_trophy //we don't butcher
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/death(gibbed)
 	mouse_opacity = MOUSE_OPACITY_ICON
@@ -151,8 +152,8 @@
 	icon_aggro = "dwarf_legion"
 	icon_dead = "dwarf_legion"
 	//mob_trophy = /obj/item/mob_trophy/dwarf_skull
-	maxHealth = 150
-	health = 150
+	maxHealth = 75
+	health = 75
 	move_to_delay = 2
 	speed = 1 //much faster!
 	dwarf_mob = TRUE
@@ -242,7 +243,8 @@
 					return //This will qdelete the legion.
 
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/proc/infest(mob/living/carbon/human/H)
-	visible_message(span_warning("[name] burrows into the flesh of [H]!"))
+	visible_message(span_warning("[name] burrows into [H]!"))
+	to_chat(H, span_boldwarning("You feel something digging into your body..."))
 	if(H.stat != DEAD)
 		var/obj/item/organ/legion_skull/throwyouabone = new()
 		throwyouabone.Insert(H)
