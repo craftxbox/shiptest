@@ -854,7 +854,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
 					mutant_category = 0
-			
+
 			if("body_marking_vulp" in pref_species.default_features)
 				if(!mutant_category)
 					dat += APPEARANCE_CATEGORY_COLUMN
@@ -867,8 +867,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
 					mutant_category = 0
-			
-			if("head_marking_vulp")
+
+			if("head_marking_vulp" in pref_species.default_features)
 				if(!mutant_category)
 					dat += APPEARANCE_CATEGORY_COLUMN
 
@@ -1748,7 +1748,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				facial_hairstyles_list = GLOB.facial_hairstyles_male_list.Copy()
 			else if(gender == FEMALE)
 				facial_hairstyles_list = GLOB.facial_hairstyles_female_list.Copy()
-			
+
 			if(pref_species.id == SPECIES_VULPKANIN) // ? refactor this to work off something in /datum/species if you add more species specific hair. Don't hack in another species like this.
 				facial_hairstyles_list += GLOB.vulpkanin_facial_hair_list
 
@@ -1824,7 +1824,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						facial_hair_color = sanitize_hexcolor(new_facial)
 
 				if("facial_hairstyle")
-					new_facial_hairstyle = input(user, "Choose your character's facial-hairstyle:", "Character Preference")  as null|anything in facial_hairstyles_list	
+					new_facial_hairstyle = input(user, "Choose your character's facial-hairstyle:", "Character Preference")  as null|anything in facial_hairstyles_list
 					if(new_facial_hairstyle)
 						facial_hairstyle = new_facial_hairstyle
 

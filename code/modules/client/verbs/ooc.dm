@@ -430,6 +430,6 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 			if(!(sender in C.prefs.ignoring))
 				if(GLOB.OOC_COLOR)
-					to_chat(C, "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>IRC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font></span>", MESSAGE_TYPE_OOC)
+					to_chat(C, "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>IRC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[message]</span></b></font></span>", MESSAGE_TYPE_OOC)
 				else
-					to_chat(C, "<span class='ooc'><span class='prefix'>IRC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>", MESSAGE_TYPE_OOC)
+					to_chat(C, "<span class='ooc'><span class='prefix'>IRC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[message]</span></span>", MESSAGE_TYPE_OOC)
