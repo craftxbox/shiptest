@@ -16,7 +16,7 @@
 	Their religious systems traditionally pay tribute to an all-infusing universal will called 'Racht'. \
 	Vulpkanin groups are minor players in galactic affairs, as they are largely concerned with the restoration of their homeworld."
 
-	bodytype = BODYTYPE_SNOUT
+	bodytype = BODYTYPE_DIGITIGRADE | BODYTYPE_SNOUT
 	mutanttongue = /obj/item/organ/tongue/vulpkanin
 	species_language_holder = /datum/language_holder/vulpkanin
 

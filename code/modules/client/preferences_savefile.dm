@@ -464,6 +464,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_vox_neck_quills"], features["vox_neck_quills"])
 	READ_FILE(S["feature_elzu_horns"], features["elzu_horns"])
 	READ_FILE(S["feature_tail_elzu"], features["tail_elzu"])
+	READ_FILE(S["feature_tail_vulp"]			, features["tail_vulp"])
+	READ_FILE(S["feature_tail_vulp_marks"]		, features["tail_vulp_marks"])
+	READ_FILE(S["feature_head_marking_vulp"]	, features["head_marking_vulp"])
+	READ_FILE(S["feature_body_marking_vulp"]	, features["body_marking_vulp"])
 
 	READ_FILE(S["equipped_gear"], equipped_gear)
 	if(config) //This should *probably* always be there, but just in case.
@@ -535,7 +539,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		facial_hairstyles_list = GLOB.facial_hairstyles_female_list.Copy()
 	else
 		underwear								= sanitize_inlist(underwear, GLOB.underwear_list)
-		undershirt 								= sanitize_inlist(undershirt, GLOB.undershirt_list) 
+		undershirt 								= sanitize_inlist(undershirt, GLOB.undershirt_list)
 
 	if(pref_species.id == SPECIES_VULPKANIN)
 		hairstyles_list += GLOB.vulpkanin_hairstyles_list
@@ -543,7 +547,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	hairstyle								= sanitize_inlist(hairstyle, hairstyles_list)
 	facial_hairstyle						= sanitize_inlist(facial_hairstyle, facial_hairstyles_list)
-		
+
 
 	socks				= sanitize_inlist(socks, GLOB.socks_list)
 	age					= sanitize_integer(age, pref_species.species_age_min, pref_species.species_age_max, initial(age))
