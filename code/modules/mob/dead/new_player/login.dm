@@ -17,6 +17,29 @@
 	if(motd)
 		to_chat(src, "<div class=\"motd\">[motd]</div>", handle_whitespace=FALSE)
 
+	if(SSdbcore.IsConnected())
+		var/datum/DBQuery/getmemosquery = SSdbcore.NewQuery("SELECT * FROM [format_table_name("memos")] ORDER BY datetime DESC LIMIT 10")
+		if(!getmemosquery.Execute(async = TRUE))
+			qdel(getmemosquery)
+			return
+		else
+			var/list/memos = list()
+			while(getmemosquery.NextRow())
+				memos += list(getmemosquery.item)
+			qdel(getmemosquery)
+
+			if(!length(memos))
+				to_chat(src, "<span class='notice'>There are no memos to read.</span>")
+				return
+
+			for(var/memo in memos)
+				var/msg = memo[3]
+				var/datetime = memo[4]
+				msg = replacetext(msg, "<span class='prefix'>MEMO:", "<span class='prefix'>\[[datetime]\]:</span>")
+				to_chat(src, msg, MESSAGE_TYPE_OOC)
+
+			to_chat(src, "<span class='notice'>End of memos.</span>")
+
 	if(GLOB.admin_notice)
 		to_chat(src, span_notice("<b>Admin Notice:</b>\n \t [GLOB.admin_notice]"))
 
