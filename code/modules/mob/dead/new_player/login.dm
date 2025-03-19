@@ -40,6 +40,30 @@
 
 			to_chat(src, "<span class='notice'>End of memos.</span>")
 
+		var/datum/DBQuery/getDirectMemosQuery = SSdbcore.NewQuery("SELECT * FROM [format_table_name("direct_memos")] WHERE (keyto = ?) ORDER BY datetime DESC",
+			list(client.ckey)
+		)
+		if(!getDirectMemosQuery.Execute(async = TRUE))
+			qdel(getDirectMemosQuery)
+			return
+		else
+			var/list/memos = list()
+			while(getDirectMemosQuery.NextRow())
+				memos += list(getDirectMemosQuery.item)
+			qdel(getDirectMemosQuery)
+
+			if(!length(memos))
+				to_chat(src, "<span class='danger'>There are no direct memos to read.</span>")
+				return
+
+			for(var/memo in memos)
+				var/msg = memo[4]
+				var/datetime = memo[5]
+				msg = replacetext(msg, "<span class='prefix'>MEMO:", "<span class='prefix'>\[DIRECT: [datetime]\]:</span>")
+				to_chat(src, msg, MESSAGE_TYPE_OOC)
+
+			to_chat(src, "<span class='notice'>End of direct memos.</span>")
+
 	if(GLOB.admin_notice)
 		to_chat(src, span_notice("<b>Admin Notice:</b>\n \t [GLOB.admin_notice]"))
 
