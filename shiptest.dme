@@ -2484,6 +2484,7 @@
 #include "code\modules\mapping\space_management\space_level.dm"
 #include "code\modules\mapping\space_management\traits.dm"
 #include "code\modules\mapping\space_management\zlevel_manager.dm"
+#include "code\modules\memos\memos.dm"
 #include "code\modules\mentor\holder2.dm"
 #include "code\modules\mentor\mentor_ranks.dm"
 #include "code\modules\mentor\mentor_verbs.dm"
