@@ -30,9 +30,11 @@
 	icon_state = "vulpkanin_l_leg"
 	limb_id = SPECIES_VULPKANIN
 	uses_mutcolor = TRUE
+	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ORGANIC | BODYTYPE_DIGITIGRADE
 
 /obj/item/bodypart/leg/right/vulpkanin
 	icon = 'icons/mob/species/vulpkanin/bodyparts.dmi'
 	icon_state = "vulpkanin_r_leg"
 	limb_id = SPECIES_VULPKANIN
 	uses_mutcolor = TRUE
+	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ORGANIC | BODYTYPE_DIGITIGRADE
