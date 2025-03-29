@@ -446,17 +446,15 @@
 /obj/item/organ/tongue/vulpkanin
 	say_mod = "rawrs"
 	var/static/list/languages_possible_vulpkanin = typecacheof(list(
-		/datum/language/common,
-		/datum/language/draconic,
-		/datum/language/codespeak,
-		/datum/language/monkey,
-		/datum/language/narsie,
-		/datum/language/beachbum,
-		/datum/language/aphasia,
-		/datum/language/piratespeak,
+		/datum/language/galactic_common,
+		/datum/language/kalixcian_common,
+		/datum/language/teceti_unified,
+		/datum/language/solarian_international,
 		/datum/language/moffic,
-		/datum/language/sylvan,
-		/datum/language/shadowtongue,
+		/datum/language/monkey,
+		/datum/language/ratvar,
+		/datum/language/codespeak,
+		/datum/language/aphasia,
 		/datum/language/canilunzt
 	))
 
