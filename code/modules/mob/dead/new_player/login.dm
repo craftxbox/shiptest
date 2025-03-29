@@ -21,7 +21,6 @@
 		var/datum/DBQuery/getmemosquery = SSdbcore.NewQuery("SELECT * FROM [format_table_name("memos")] ORDER BY datetime DESC LIMIT 10")
 		if(!getmemosquery.Execute(async = TRUE))
 			qdel(getmemosquery)
-			return
 		else
 			var/list/memos = list()
 			while(getmemosquery.NextRow())
@@ -30,22 +29,20 @@
 
 			if(!length(memos))
 				to_chat(src, "<span class='notice'>There are no memos to read.</span>")
-				return
+			else
+				for(var/memo in memos)
+					var/msg = memo[3]
+					var/datetime = memo[4]
+					msg = replacetext(msg, "<span class='prefix'>MEMO:", "<span class='prefix'>\[[datetime]\]:</span>")
+					to_chat(src, msg, MESSAGE_TYPE_OOC)
 
-			for(var/memo in memos)
-				var/msg = memo[3]
-				var/datetime = memo[4]
-				msg = replacetext(msg, "<span class='prefix'>MEMO:", "<span class='prefix'>\[[datetime]\]:</span>")
-				to_chat(src, msg, MESSAGE_TYPE_OOC)
-
-			to_chat(src, "<span class='notice'>End of memos.</span>")
+				to_chat(src, "<span class='notice'>End of memos.</span>")
 
 		var/datum/DBQuery/getDirectMemosQuery = SSdbcore.NewQuery("SELECT * FROM [format_table_name("direct_memos")] WHERE (keyto = ?) ORDER BY datetime DESC",
 			list(client.ckey)
 		)
 		if(!getDirectMemosQuery.Execute(async = TRUE))
 			qdel(getDirectMemosQuery)
-			return
 		else
 			var/list/memos = list()
 			while(getDirectMemosQuery.NextRow())
@@ -54,15 +51,14 @@
 
 			if(!length(memos))
 				to_chat(src, "<span class='danger'>There are no direct memos to read.</span>")
-				return
+			else
+				for(var/memo in memos)
+					var/msg = memo[4]
+					var/datetime = memo[5]
+					msg = replacetext(msg, "<span class='prefix'>MEMO:", "<span class='prefix'>\[DIRECT: [datetime]\]:</span>")
+					to_chat(src, msg, MESSAGE_TYPE_OOC)
 
-			for(var/memo in memos)
-				var/msg = memo[4]
-				var/datetime = memo[5]
-				msg = replacetext(msg, "<span class='prefix'>MEMO:", "<span class='prefix'>\[DIRECT: [datetime]\]:</span>")
-				to_chat(src, msg, MESSAGE_TYPE_OOC)
-
-			to_chat(src, "<span class='notice'>End of direct memos.</span>")
+				to_chat(src, "<span class='notice'>End of direct memos.</span>")
 
 	if(GLOB.admin_notice)
 		to_chat(src, span_notice("<b>Admin Notice:</b>\n \t [GLOB.admin_notice]"))
@@ -89,3 +85,4 @@
 	if(SSticker.current_state < GAME_STATE_SETTING_UP)
 		var/tl = SSticker.GetTimeLeft()
 		to_chat(src, "Please set up your character and select \"Ready\". The game will start [tl > 0 ? "in about [DisplayTimeText(tl)]" : "soon"].")
+

@@ -107,7 +107,7 @@
 	qdel(setmemoquery)
 
 /client/verb/sendmemo(dest as text, msg as message)
-	set name = "Send Memo"
+	set name = "Send Direct Memo"
 	set desc = "Send a memo to a specific player."
 	set category = "OOC"
 
@@ -272,3 +272,31 @@
 
 		to_chat(src, "<span class='notice'>End of direct memos.</span>")
 
+#define TGS_MEMO_USAGE "Usage: memo <message>"
+/proc/TgsMemo(msg,sender)
+	var/keyname = "<font color='green'><i title='This user was connected to IRC and was not in game.'>[sender]</i></font>"
+
+	var/message = strip_html(msg) // Why this is needed: https://transfur.science/ql46uynr
+
+	for(var/client/C in GLOB.clients)
+		if(C.prefs.chat_toggles & CHAT_OOC)
+			if(sender in C.prefs.ignoring)
+				continue
+
+			if(!(sender in C.prefs.ignoring))
+				if(GLOB.OOC_COLOR)
+					final_msg = "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>MEMO(IRC):</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font></span>"
+					to_chat(C, final_msg, MESSAGE_TYPE_OOC)
+				else
+					final_msg = "<span class='ooc'><span class='prefix'>MEMO(IRC):</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>"
+					to_chat(C, final_msg, MESSAGE_TYPE_OOC)
+
+	var/time = time_stamp()
+
+	var/datum/DBQuery/setmemoquery = SSdbcore.NewQuery("INSERT INTO [format_table_name("memos")] (ckey, message, datetime) VALUES (:ckey, :msg, :time)",
+		list("ckey" = key, "msg" = final_msg, "time" = time)
+	)
+	if(!setmemoquery.warn_execute())
+		qdel(setmemoquery)
+		return
+	qdel(setmemoquery)
