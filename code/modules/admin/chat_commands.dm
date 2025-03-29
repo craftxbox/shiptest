@@ -8,6 +8,14 @@
 	TgsOoc(params, sender.friendly_name)
 	return new /datum/tgs_message_content("IRC: <[sender.friendly_name]> [params]")
 
+/datum/tgs_chat_command/memo
+	name = "memo"
+	help_text = "Sends a memo to the server."
+
+/datum/tgs_chat_command/memo/Run(datum/tgs_chat_user/sender, params)
+	TgsMemo(params, sender.friendly_name)
+	return new /datum/tgs_message_content("MEMO(IRC): <[sender.friendly_name]> [params]")
+
 /datum/tgs_chat_command/restart
 	name = "restart"
 	help_text = "Restarts the server if there are no active admins on."
@@ -184,6 +192,7 @@
 	embed.description = tgsadminwho() || "No admins online."
 
 	var/datum/tgs_message_content/adminwho = new()
+	adminwho.text = tgsadminwho() || "No admins online."
 	adminwho.embed = embed
 
 	return adminwho
@@ -226,6 +235,7 @@ GLOBAL_LIST(round_end_notifiees)
 
 	var/datum/tgs_message_content/sdql = new()
 	sdql.embed = embed
+	sdql.text = "Query successful."
 
 	return sdql
 
@@ -271,6 +281,7 @@ GLOBAL_LIST(round_end_notifiees)
 
 	var/datum/tgs_message_content/manifest_content = new()
 	manifest_content.embed = embed
+	manifest_content.text = "_ _"
 
 	return manifest_content
 
@@ -292,5 +303,6 @@ GLOBAL_LIST(round_end_notifiees)
 
 	var/datum/tgs_message_content/who = new()
 	who.embed = embed
+	who.text = replacetext(embed.description, "\n", ",")
 
 	return who
