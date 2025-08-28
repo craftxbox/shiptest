@@ -114,6 +114,9 @@
 				ship_loc = SSovermap.outposts[1]
 				selected_system = SSovermap.tracked_star_systems[1]
 
+			if(template.space_spawn)
+				ship_loc = null // workaround to fix space spawns not working in the presence of multiple outposts
+
 			if(!selected_system)
 				CRASH("Ship attemped to be bought at spawn menu, but spawning outpost was not selected! This is bad!") //if selected_system didnt get selected, we nope out, this is very bad
 
