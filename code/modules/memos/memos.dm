@@ -285,16 +285,16 @@
 
 			if(!(sender in C.prefs.ignoring))
 				if(GLOB.OOC_COLOR)
-					final_msg = "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>MEMO(IRC):</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font></span>"
-					to_chat(C, final_msg, MESSAGE_TYPE_OOC)
+					message = "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b><span class='prefix'>MEMO(IRC):</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font></span>"
+					to_chat(C, message, MESSAGE_TYPE_OOC)
 				else
-					final_msg = "<span class='ooc'><span class='prefix'>MEMO(IRC):</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>"
-					to_chat(C, final_msg, MESSAGE_TYPE_OOC)
+					message = "<span class='ooc'><span class='prefix'>MEMO(IRC):</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>"
+					to_chat(C, message, MESSAGE_TYPE_OOC)
 
 	var/time = time_stamp()
 
 	var/datum/DBQuery/setmemoquery = SSdbcore.NewQuery("INSERT INTO [format_table_name("memos")] (ckey, message, datetime) VALUES (:ckey, :msg, :time)",
-		list("ckey" = key, "msg" = final_msg, "time" = time)
+		list("ckey" = sender, "msg" = message, "time" = time)
 	)
 	if(!setmemoquery.warn_execute())
 		qdel(setmemoquery)
