@@ -446,7 +446,7 @@ SUBSYSTEM_DEF(overmap)
 	spawn_ruin_levels()
 
 	if(has_outpost)
-		var/numberOfOutposts = max(floor(size/16),1)
+		var/numberOfOutposts = max(floor(size/64),1)
 
 		for (var/i in 1 to numberOfOutposts) // one outpost every 16 tiles of overmap size
 			spawn_outpost()
@@ -517,7 +517,7 @@ SUBSYSTEM_DEF(overmap)
  * Creates a single outpost somewhere near the center of the system.
  */
 /datum/overmap_star_system/proc/spawn_outpost()
-	var/list/location = get_unused_overmap_square_in_radius(rand(4, round(size/5)))
+	var/list/location = get_unused_overmap_square_in_radius(rand(4, round(size/7)))
 
 	var/datum/overmap/outpost/found_type
 	if(fexists(OUTPOST_OVERRIDE_FILEPATH))
