@@ -94,51 +94,51 @@
 	icon_state = "none"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/fluffy/fade
-	name = "Fluffy Fade"
+	name = "Fade"
 	icon_state = "fluffy_fade"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/fluffy/tip
-	name = "Fluffy Tip"
+	name = "Tip"
 	icon_state = "fluffy_tip"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/ninesune/fade
-	name = "Nine Sune Fade"
+	name = "Fade"
 	icon_state = "ninesune_fade"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/ninesune/tip
-	name = "Nine Sune Tip"
+	name = "Tip"
 	icon_state = "ninesune_tip"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/paintbrush/fade
-	name = "Paintbrush Fade"
+	name = "Fade"
 	icon_state = "paintbrush_fade"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/paintbrush/tip
-	name = "Paintbrush Tip"
+	name = "Tip"
 	icon_state = "paintbrush_tip"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/sevensune/fade
-	name = "Seven Sune Fade"
+	name = "Fade"
 	icon_state = "sevensune_fade"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/sevensune/tip
-	name = "Seven Sune Tip"
+	name = "Tip"
 	icon_state = "sevensune_tip"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/sleek/fade
-	name = "Sleek Fade"
+	name = "Fade"
 	icon_state = "sleek_fade"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/sleek/tip
-	name = "Sleek Tip"
+	name = "Tip"
 	icon_state = "sleek_tip"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/up/fade
-	name = "Up Fade"
+	name = "Fade"
 	icon_state = "up_fade"
 
 /datum/sprite_accessory/vulpkanin/tail_markings/up/tip
-	name = "Up Tip"
+	name = "Tip"
 	icon_state = "up_tip"
 
 //head markings
