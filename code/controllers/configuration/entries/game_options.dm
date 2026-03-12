@@ -408,3 +408,6 @@
 	config_entry_value = 30
 
 /datum/config_entry/flag/native_fov
+
+/datum/config_entry/flag/limit_ships_of_same_type
+	config_entry_value = TRUE

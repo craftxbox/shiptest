@@ -95,7 +95,7 @@
 			for(var/datum/overmap/ship/controlled/Ship as anything in SSovermap.controlled_ships)
 				if(template == Ship.source_template)
 					num_ships_with_template += 1
-			if(num_ships_with_template >= template.limit)
+			if(CONFIG_GET(flag/limit_ships_of_same_type) && num_ships_with_template >= template.limit)
 				to_chat(spawnee, span_danger("There are already [num_ships_with_template] ships of this type; you cannot spawn more!"))
 				return
 
